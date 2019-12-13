@@ -1,5 +1,8 @@
 import Footer from "../../src/components/Footer.vue";
 import { mount } from '@vue/test-utils'
+//import { shallowMount } from '@vue/test-utils'
+//jest.mock('axios')
+
 
 //TASK 3:
 //Create Test to test when "+" button is clicked in Footer component, "open" property
@@ -8,8 +11,12 @@ import { mount } from '@vue/test-utils'
 
 describe('Footer is rendered correctly', () => {
 
-    //TODO:  TEGEMATA!
-    it('Check if 1 equals 1', () => {
-        expect(1).toEqual(1)
+    it('Footer open property changes to true when + is clicked', () => {
+        const wrapper = mount(Footer)
+        const vm = wrapper.vm
+        //console.log(wrapper.text())
+        expect(wrapper.vm.open).toBe(false)  //before click
+        wrapper.find('span').trigger('click')
+        expect(wrapper.vm.open).toBe(true)  //after click
     })
 });

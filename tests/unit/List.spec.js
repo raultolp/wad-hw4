@@ -16,14 +16,17 @@ import { mount } from '@vue/test-utils'
 
 describe('List works correctly', () => {
 
+    //TASK 4:
+    //TODO: TEGEMATA!
+
+
+
+
+
     //TASK 1:
     it('Check if list is empty, should display text', () => {
         const wrapper = mount(List)
         expect(wrapper.html()).toContain('Add your first Todo task')
     })
-
-    //TASK 4:
-    //TODO: TEGEMATA!
-
 
 });
