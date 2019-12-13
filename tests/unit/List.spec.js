@@ -17,9 +17,6 @@ import { mount } from '@vue/test-utils'
 describe('List works correctly', () => {
 
     //TASK 4:
-    //TODO: TEGEMATA!
-
-//TASK 4:
     //TODO: NOT FINISHED!
 
     it('When item marked as done, item is updated correctly',  () => {
@@ -28,11 +25,13 @@ describe('List works correctly', () => {
                 id: 1,
                 title: 'Foo',
                 done: false
-            }, {
+            },
+            {
                 id: 2,
                 title: 'Bar',
                 done: false
-            }, {
+            },
+            {
                 id: 3,
                 title: 'Foobar',
                 done: true
@@ -44,32 +43,42 @@ describe('List works correctly', () => {
             }
         });
 
+
         const vm = wrapper.vm;
         console.log(wrapper.findAll('.done').length);  //1
         const notDoneElements = wrapper.findAll('.list-item:not(.done)');
         let firstNotDoneElement = notDoneElements.at(0);
-        console.log(firstNotDoneElement.text());   //Foo
-        console.log(firstNotDoneElement.html());
+
+        //Before clicking on element:
+        expect(firstNotDoneElement.contains('.list-item:not(.done)')).toBeTruthy; //.toBe(true);
+
+        // console.log(firstNotDoneElement.text());   //Foo
+        // console.log(firstNotDoneElement.html());
         /*        <div class="list-item">
                     <div class="title">Foo</div>
                     <div><span></span></div>
                 </div>*/
 
-        console.log(firstNotDoneElement.done);  //undefined...
+        // console.log(firstNotDoneElement.done);  //undefined...
 
         //Click on element:
         firstNotDoneElement.find('span').trigger('click'); //doesnt work
         //firstNotDoneElement.trigger('click') //doesnt work
-        console.log(wrapper.findAll('.done').length);  //1  - peaks olema 2....
-        //...
+        // console.log(wrapper.findAll('.done').length);  //1  - peaks olema 2....
 
+        //Click on element:
+        //firstNotDoneElement.find('span').trigger('click') //doesnt work
+        //firstNotDoneElement.trigger('click') //doesnt work
+
+        //...
         //Check if the clicked element is now done:
         //...
 
-        expect(1).toEqual(1);
+        //After clicking on element:
+        expect(firstNotDoneElement.contains('.list-item:not(.done)')).toBeFalsy; //.toBe(false);
+
+        // expect(1).toEqual(1);
     });
-
-
 
     //TASK 1:
     it('Check if list is empty, should display text', () => {
