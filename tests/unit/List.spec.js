@@ -16,25 +16,33 @@ import { mount } from '@vue/test-utils'
 
 describe('List works correctly', () => {
 
-    //TASK 4:
-    //TODO: NOT FINISHED!
-
+    //TASK 4: TODO: NOT FINISHED
     it('When item marked as done, item is updated correctly',  () => {
         const testData = [
             {
                 id: 1,
-                title: 'Foo',
-                done: false
+                title: 'Test title #1',
+                done: true
             },
             {
                 id: 2,
-                title: 'Bar',
+                title: 'Test title #2',
                 done: false
             },
             {
                 id: 3,
-                title: 'Foobar',
+                title: 'Test title #3',
+                done: false
+            },
+            {
+                id: 4,
+                title: 'Test title #4',
                 done: true
+            },
+            {
+                id: 5,
+                title: 'Test title #5',
+                done: false
             }];
 
         const wrapper = mount(List, {
@@ -43,41 +51,33 @@ describe('List works correctly', () => {
             }
         });
 
-
         const vm = wrapper.vm;
-        console.log(wrapper.findAll('.done').length);  //1
         const notDoneElements = wrapper.findAll('.list-item:not(.done)');
         let firstNotDoneElement = notDoneElements.at(0);
 
-        //Before clicking on element:
-        expect(firstNotDoneElement.contains('.list-item:not(.done)')).toBeTruthy; //.toBe(true);
-
-        // console.log(firstNotDoneElement.text());   //Foo
-        // console.log(firstNotDoneElement.html());
+        // CONSOLE LOG
+        console.log("Done:", wrapper.findAll('.done').length);  // 2
+        // console.log("Element text:", firstNotDoneElement.text());   // Test title #2
+        // console.log("Element html:", firstNotDoneElement.html());
         /*        <div class="list-item">
-                    <div class="title">Foo</div>
+                    <div class="title">Test title #2</div>
                     <div><span></span></div>
                 </div>*/
 
         // console.log(firstNotDoneElement.done);  //undefined...
+        // console.log("notDone:", notDoneElements.length); // 3
+
+        //Before clicking on element:
+        expect(firstNotDoneElement.contains('.list-item:not(.done)')).toBe(true);
 
         //Click on element:
+
         firstNotDoneElement.find('span').trigger('click'); //doesnt work
-        //firstNotDoneElement.trigger('click') //doesnt work
-        // console.log(wrapper.findAll('.done').length);  //1  - peaks olema 2....
-
-        //Click on element:
-        //firstNotDoneElement.find('span').trigger('click') //doesnt work
-        //firstNotDoneElement.trigger('click') //doesnt work
-
-        //...
-        //Check if the clicked element is now done:
-        //...
+        // firstNotDoneElement.trigger('click') //doesnt work
+        console.log("Done:", wrapper.findAll('.done').length);  //2  - peaks olema 3....
 
         //After clicking on element:
-        expect(firstNotDoneElement.contains('.list-item:not(.done)')).toBeFalsy; //.toBe(false);
-
-        // expect(1).toEqual(1);
+        expect(firstNotDoneElement.contains('.list-item:not(.done)')).toBe(false);
     });
 
     //TASK 1:
