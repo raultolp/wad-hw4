@@ -17,4 +17,4 @@ module.exports = {
     ],
     testURL: 'http://localhost/',
     transformIgnorePatterns: ['/node_modules(?![\\\\/]vue-awesome[\\\\/])/']
-}
+};

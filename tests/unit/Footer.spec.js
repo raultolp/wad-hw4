@@ -12,11 +12,11 @@ import { mount } from '@vue/test-utils'
 describe('Footer is rendered correctly', () => {
 
     it('Footer open property changes to true when + is clicked', () => {
-        const wrapper = mount(Footer)
-        const vm = wrapper.vm
-        //console.log(wrapper.text())
-        expect(wrapper.vm.open).toBe(false)  //before click
-        wrapper.find('span').trigger('click')
-        expect(wrapper.vm.open).toBe(true)  //after click
+        const wrapper = mount(Footer);
+        const vm = wrapper.vm;
+        //console.log(wrapper.text());
+        expect(wrapper.vm.open).toBe(false);  //before click
+        wrapper.find('span').trigger('click');
+        expect(wrapper.vm.open).toBe(true);  //after click
     })
 });
