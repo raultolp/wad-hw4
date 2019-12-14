@@ -1,9 +1,7 @@
 <template>
     <div class="container">
         <div v-if="open">
-            <label>
-                <input type="text" v-model="title" placeholder="Please enter a title..." autofocus @keyup.enter="addItem">
-            </label>
+            <input type="text" v-model="title" placeholder="Please enter a title..." autofocus @keyup.enter="addItem">
         </div>
         <div v-else>
             <span @click="open = true">+</span>

@@ -1,10 +1,8 @@
 <template>
     <div>
-        <label>
-            <select @change="onChange($event.target.value)">
-                <option v-for="user in users" :key="user.id" :value="user.id">{{ user.name }}</option>
-            </select>
-        </label>
+        <select @change="onChange($event.target.value)">
+            <option v-for="user in users" :key="user.id" :value="user.id">{{ user.name }}</option>
+        </select>
     </div>
 </template>
 
