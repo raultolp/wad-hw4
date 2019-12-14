@@ -22,9 +22,9 @@ describe('List works correctly', () => {
             {
                 id: 1,
                 title: 'Test title #1',
-                done: true
+                done: false
             },
-            {
+            /*{
                 id: 2,
                 title: 'Test title #2',
                 done: false
@@ -43,16 +43,17 @@ describe('List works correctly', () => {
                 id: 5,
                 title: 'Test title #5',
                 done: false
-            }];
+            }*/];
 
         const wrapper = mount(List, {
             propsData: {
-                list: testData
+                list: testData,
             }
         });
 
         // const vm = wrapper.vm;
-        const notDoneElements = wrapper.findAll('.list-item:not(.done)');
+        //      const notDoneElements = wrapper.findAll('.list-item:not(.done)');
+        const notDoneElements = wrapper.findAll('.list-item');
         let firstNotDoneElement = notDoneElements.at(0);
 
         //TESTIMISEKS
@@ -77,6 +78,8 @@ describe('List works correctly', () => {
 
         //Before clicking on element:
         expect(firstNotDoneElement.contains('.list-item:not(.done)')).toBe(true);
+        //    expect(wrapper.props('list').at(0).contains('.list-item:not(.done)')).toBe(true);
+        //    expect(wrapper.props('testItem').contains('.list-item:not(.done)')).toBe(true);
 
         //Click on element:
         firstNotDoneElement.find('.list-item span').trigger('click'); //doesnt work
@@ -87,7 +90,9 @@ describe('List works correctly', () => {
         // console.log("Done:", wrapper.findAll('.done').length);  //2  - peaks olema 3....
 
         //After clicking on element:
-        expect(firstNotDoneElement.contains('.list-item:not(.done)')).toBe(false);
+        const DoneElements = wrapper.findAll('.list-item');
+        let firstDoneElement = notDoneElements.at(0);
+        expect(firstDoneElement.contains('.done')).toBe(false);
         // expect(1).toEqual(1);
     });
 

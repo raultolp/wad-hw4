@@ -37,7 +37,32 @@
         },
         data: () => {
             return {
-                list: [],
+                list: [
+            {
+                id: 1,
+                title: 'Test title #1',
+                done: true
+            },
+            {
+                id: 2,
+                title: 'Test title #2',
+                done: false
+            },
+            {
+                id: 3,
+                title: 'Test title #3',
+                done: false
+            },
+            {
+                id: 4,
+                title: 'Test title #4',
+                done: true
+            },
+            {
+                id: 5,
+                title: 'Test title #5',
+                done: false
+            }],
                 users: [
                     new User(1, 'First User'),
                     new User(2, 'Second User'),
