@@ -49,7 +49,7 @@ describe('List works correctly', () => {
         }
     });
 
-    // TASK 4: TODO: NOT FINISHED
+    // TASK 4
     it('When item marked as done, item is updated correctly',  () => {
 
         const notDoneElements = wrapper.findAll('.list-item:not(.done)');
@@ -64,16 +64,12 @@ describe('List works correctly', () => {
         expect(DoneElements.length).toEqual(DoneItems.length);
 
         // TESTIMISEKS
-        notDoneItems.forEach(function (item) {
-            console.log("notDoneItems:", item.id, item.title, item.done)
-        });
+        // notDoneItems.forEach(function (item) { console.log("notDoneItems:", item.id, item.title, item.done) });
+        // console.log(wrapper.props().valueOf());
 
         if (notDoneItems.length > 0) {
             // Before clicking on element:
             let firstNotDoneElement = notDoneElements.at(0);
-            let notDoneItem = notDoneItems.pop();
-            expect(notDoneItem.done).toBe(false);
-            // expect(firstNotDoneElement.find('span')).toBe(false);
 
             // Click on element:
             firstNotDoneElement.find('span').trigger('click');
@@ -81,17 +77,12 @@ describe('List works correctly', () => {
             // After clicking on element:
             let newNotDoneItems = testData.filter(item => !item.done);
             let newDoneItems = testData.filter(item => item.done);
-            expect(newNotDoneItems.length).toEqual(notDoneItems.length); //old list had pop, thats way now lenght -1
+            expect(newNotDoneItems.length).toEqual(notDoneItems.length - 1);
             expect(newDoneItems.length).toEqual(DoneItems.length + 1);
 
-            // let newDoneItem = newDoneItems.pop();
-            // expect(newDoneItem.id).toEqual(notDoneItem.id);
-            // expect(newDoneItem.done).toBe(true);
-
             // TESTIMISEKS
-            newDoneItems.forEach(function (item) {
-                console.log("newDoneItems:", item.id, item.title, item.done)
-            });
+            // newDoneItems.forEach(function (item) { console.log("newDoneItems:", item.id, item.title, item.done)  });
+            // console.log(wrapper.props().valueOf());
         }
     });
 
