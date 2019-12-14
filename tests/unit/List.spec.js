@@ -16,84 +16,67 @@ import { mount } from '@vue/test-utils'
 
 describe('List works correctly', () => {
 
+    const testData = [
+        {
+            id: 1,
+            title: 'Test title #1',
+            done: true
+        },
+        {
+            id: 2,
+            title: 'Test title #2',
+            done: false
+        },
+        {
+            id: 3,
+            title: 'Test title #3',
+            done: true
+        },
+        {
+            id: 4,
+            title: 'Test title #4',
+            done: true
+        },
+        {
+            id: 5,
+            title: 'Test title #5',
+            done: false
+        }];
+
+    const wrapper = mount(List, {
+        propsData: {
+            list: testData,
+        }
+    });
+
     //TASK 4: TODO: NOT FINISHED
     it('When item marked as done, item is updated correctly',  () => {
-        const testData = [
-            {
-                id: 1,
-                title: 'Test title #1',
-                done: false
-            },
-            /*{
-                id: 2,
-                title: 'Test title #2',
-                done: false
-            },
-            {
-                id: 3,
-                title: 'Test title #3',
-                done: false
-            },
-            {
-                id: 4,
-                title: 'Test title #4',
-                done: true
-            },
-            {
-                id: 5,
-                title: 'Test title #5',
-                done: false
-            }*/];
 
-        const wrapper = mount(List, {
-            propsData: {
-                list: testData,
-            }
-        });
+        const notDoneElements = wrapper.findAll('.list-item:not(.done)');
+        const DoneElements = wrapper.findAll('.done');
+        expect(notDoneElements.length + DoneElements.length).toEqual(testData.length);
 
-        // const vm = wrapper.vm;
-        //      const notDoneElements = wrapper.findAll('.list-item:not(.done)');
-        const notDoneElements = wrapper.findAll('.list-item');
-        let firstNotDoneElement = notDoneElements.at(0);
+        const notDoneItems = testData.filter(item => !item.done);
+        const DoneItems = testData.filter(item => item.done);
+        expect(notDoneItems.length + DoneItems.length).toEqual(testData.length);
 
-        //TESTIMISEKS
-        // const spy = spyOn(wrapper.vm, 'toggle');
-        // wrapper.vm.$emit('click');
-        // const button = firstNotDoneElement.find('span');
-        // console.log(button.html());
-        // button.trigger('click');
-        // console.log(button.html());
+        expect(notDoneElements.length).toEqual(notDoneItems.length);
+        expect(DoneElements.length).toEqual(DoneItems.length);
 
-        // CONSOLE LOG
-        // console.log("Done:", wrapper.findAll('.done').length);  // 2
-        // console.log("notDone:", notDoneElements.length); // 3
-        // console.log(firstNotDoneElement.done);  //undefined..
+        if (notDoneItems.length > 0) {
+            //Before clicking on element:
+            let firstNotDoneElement = notDoneElements.at(0);
+            let notDoneItem = notDoneItems.pop();
+            expect(notDoneItem.done).toBe(false);
+            // expect(firstNotDoneElement.find('span')).toBe(false);
 
-        // console.log("Element text:", firstNotDoneElement.text());   // Test title #2
-        // console.log("Element html:", firstNotDoneElement.html());
-        //         <div class="list-item">
-        //             <div class="title">Test title #2</div>
-        //             <div><span></span></div>
-        //         </div>
+            //Click on element:
+            firstNotDoneElement.find('span').trigger('click');
 
-        //Before clicking on element:
-        expect(firstNotDoneElement.contains('.list-item:not(.done)')).toBe(true);
-        //    expect(wrapper.props('list').at(0).contains('.list-item:not(.done)')).toBe(true);
-        //    expect(wrapper.props('testItem').contains('.list-item:not(.done)')).toBe(true);
-
-        //Click on element:
-        firstNotDoneElement.find('.list-item span').trigger('click'); //doesnt work
-        // wrapper.find(firstNotDoneElement.name()).trigger('click'); //doesnt work
-        // firstNotDoneElement.element.click(); // doesnt work
-        // firstNotDoneElement.find('div').trigger('click'); //doesnt work
-        // firstNotDoneElement.trigger('click'); //doesnt work
-        // console.log("Done:", wrapper.findAll('.done').length);  //2  - peaks olema 3....
-
-        //After clicking on element:
-        const DoneElements = wrapper.findAll('.list-item');
-        let firstDoneElement = notDoneElements.at(0);
-        expect(firstDoneElement.contains('.done')).toBe(false);
-        // expect(1).toEqual(1);
+            //After clicking on element:
+            let newNotDoneItems = testData.filter(item => !item.done);
+            expect(newNotDoneItems.length).toEqual(notDoneItems.length); //old list had pop, thats way now lenght -1
+        }
     });
 
     //TASK 1:
